@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
 const db = mongoose.connection;
-const configs = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
+const dbUrl = process.env.DATABASE_URL;
 
-mongoose.connect(process.env.DB_URL, configs);
-
-db.on("error", console.error.bind(console, "connection error:"));
-db.once("open", () => {
-  console.log("Connected to MyFlexSpace Cloud Cluster");
-});
+mongoose
+	.connect(dbUrl)
+	.then(() =>
+		console.log(
+			`MongoDB successfully connected at ${db.host}:${db.port}! How dope!`
+		)
+	)
+	.catch((err) => console.log(`MongoDB connection FAILED :( Error: ${err}`));
 
 module.exports = {
-  User: require("./User"),
-  Post: require("./Post"),
+	User: require("./User"),
+	Post: require("./Post"),
 };
