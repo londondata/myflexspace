@@ -12,7 +12,7 @@ const app = express(); // create express app
 
 /* ====  Configuration  ==== */
 //NOTE bring in config from packages
-const config = require("@monorepoexample/config");
+const config = require("@myflexspace/config");
 
 /* ====  Middleware  ==== */
 //Cors
@@ -24,13 +24,13 @@ app.use(express.static("public"));
 app.use(express.json());
 //custom logger to show the url and req.body if one exists
 app.use((req, res, next) => {
-  console.log(req.url);
-  // is there an auth header
-  console.log("AUTH HEADER: ", req.headers.authorization);
-  if (req.body) {
-    console.log("BODY BEING SENT: ", req.body);
-  }
-  next();
+	console.log(req.url);
+	// is there an auth header
+	console.log("AUTH HEADER: ", req.headers.authorization);
+	if (req.body) {
+		console.log("BODY BEING SENT: ", req.body);
+	}
+	next();
 });
 
 /* ====  Routes & Controllers  ==== */
@@ -39,21 +39,22 @@ app.use("/api", routes);
 
 //This is to catch anything that's trying to hit an api route that isn't made
 app.all("/api/*", function (req, res, next) {
-  res.send("THIS IS NOT AN API ROUTE");
+	res.send("THIS IS NOT AN API ROUTE");
 });
 
-//IS THE REACT FULL STACK MAGIC MIDDLEWARE
+//THIS IS THE REACT FULL STACK MAGIC MIDDLEWARE
+// Anything that is NOT an api route will therefore be handled by React Router, which is set up right here. The API routes must hit first, order matters, then react via the React build directory.
 /*
 ANY REQUEST not covered by routes express makes -- will get piped to this middleware
 and this middleware's job is to handover control to react
 */
 app.use((req, res, next) => {
-  console.log(req.headers);
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+	console.log(req.headers);
+	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 /* ====  Server Listener / Connection ==== */
 // start express server
 app.listen(config.PORT, () => {
-  console.log(`server started on port ${config.PORT}`);
+	console.log(`server started on port ${config.PORT}`);
 });
