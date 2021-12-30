@@ -1,0 +1,16 @@
+/* Welcome CSS */
+
+.flex-body {
+	height: 40vh;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.welcome-text {
+	padding: 25px;
+	color: white;
+	text-shadow: 0 0 12px #c8c8c8;
+}
