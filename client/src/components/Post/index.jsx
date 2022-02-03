@@ -1,6 +1,7 @@
 import React from "react";
 // Load in Comment component
 import Comment from "../Comment";
+import Dopeness from "../Dopeness";
 
 function Post(props) {
 	let comments = props.comments.map((comment, index) => (
@@ -12,6 +13,9 @@ function Post(props) {
 			<p>By {props.author}</p>
 			<div>
 				<p>{props.body}</p>
+			</div>
+			<div>
+				<Dopeness />
 			</div>
 			<h3>Comments:</h3>
 			{comments}
