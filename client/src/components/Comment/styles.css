@@ -1,0 +1,11 @@
+.comment {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid gray;
+	margin: 8px;
+	padding: 4px;
+}
+
+.comment-buttons button {
+	margin-left: 16px;
+}
